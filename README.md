@@ -8,7 +8,7 @@ We are going to set it using `Docker`. For that we gonna need two images :
 	1. mongo
 	2. mongo-express ( a user interface for our mongo database )
 
-***Note: We are NOT seting it up in our system. We are setting it in Docker.** *
+***Note: We are NOT setting it up in our system. We are setting it in Docker.** *
 
 ***Also, we want both of our containers to interact with each other without any `port` or `limitation`. For which, we are going to use `Docker Network`.
 	`Docker Network` is like an `isolated network area` & Containers inside a specific docker network can interact with each other without any limitations.
@@ -32,3 +32,11 @@ Note : In the `MONGODB_URL` environment variable, that `mongo` after `@` is the 
 #### Docker Compose :
 
     `Creating containers with ".yaml" file`.`
+
+---
+
+### Note:
+
+Check the `SETUP.md` file for the steps for setting up.
+
+For Docker steps, check the `DOCKERHUB_README.md ` file.

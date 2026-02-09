@@ -1,17 +1,17 @@
 # Docker-testapp
 
+> 🔗 Forked from: [shradha-khapra/docker-testapp](https://github.com/shradha-khapra/docker-testapp)
+
 #### Info:
 
 In this app, we are using `MongoDB` for Database, but we haven't set it up.
 
-We are going to set it using `Docker`. For that we gonna need two images :
-	1. mongo
-	2. mongo-express ( a user interface for our mongo database )
+We are going to set it using `Docker`. For that we gonna need two images : 1. mongo 2. mongo-express ( a user interface for our mongo database )
 
-***Note: We are NOT setting it up in our system. We are setting it in Docker.** *
+**\*Note: We are NOT setting it up in our system. We are setting it in Docker.** \*
 
-***Also, we want both of our containers to interact with each other without any `port` or `limitation`. For which, we are going to use `Docker Network`.
-	`Docker Network` is like an `isolated network area` & Containers inside a specific docker network can interact with each other without any limitations.
+\*\*\*Also, we want both of our containers to interact with each other without any `port` or `limitation`. For which, we are going to use `Docker Network`.
+`Docker Network` is like an `isolated network area` & Containers inside a specific docker network can interact with each other without any limitations.
 
 ---
 

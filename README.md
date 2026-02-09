@@ -32,5 +32,3 @@ Note : In the `MONGODB_URL` environment variable, that `mongo` after `@` is the 
 #### Docker Compose :
 
     `Creating containers with ".yaml" file`.`
-
----

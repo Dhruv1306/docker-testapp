@@ -1,0 +1,76 @@
+version: "3.8"
+
+services:             # services are containers used by `Docker Compose`.
+  mongodb:            # This is the service name in Docker Compose.
+    image: mongo:latest
+    container_name: mongodb   #This is the actual container name that Docker assigns to the running container.This is what you see when running "docker ps".
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    #volumes:
+      #- mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: qwerty
+
+  mongo-express:                          # This is an another container inside Docker Compose, which is a web-based MongoDB admin interface.
+    image: mongo-express:latest           # Isn't necessary to specify the tag / version.
+    container_name: mongo-express
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: qwerty
+      ME_CONFIG_MONGODB_URL: mongodb://admin:qwerty@mongodb:27017/
+
+  testapp:
+    image: testapp:1.0
+    container_name: testapp
+    restart: unless-stopped
+    ports:
+      - "5050:5050"
+    depends_on:
+      - mongodb
+    environment:
+      MONGO_DB_USERNAME: admin
+      MONGO_DB_PWD: qwerty
+      MONGO_URL: mongodb://admin:qwerty@mongodb:27017/
+
+
+# Note:  "services' name" must be unique within the compose file.
+# Note:  "container_name" must be unique across all containers in the Docker environment.
+
+
+#Note: The "volumes" section defines a named volume called "mongodb_data" that is used to persist the MongoDB data. This means that even if the container is stopped or removed, the data will still be available in the "mongodb_data" volume.
+
+
+#Note: restart: no  (default)
+#Note: restart: always  (always restart the container if it stops, even if it was stopped manually)
+#Note: restart: unless-stopped  (always restart the container UNLESS it was stopped manually)
+
+
+#Note: no need to create "network" section because by default, Docker Compose creates a single network for all the services defined in the compose file. This means that all the services can communicate with each other using their service names as hostname.
+
+
+#Note: The "depends_on" option is used to specify that the "testapp" service depends on the "mongodb" service. This means that when you start the services using Docker Compose, it will ensure that the "mongodb" service is started before the "testapp" service. However, it does not wait for the "mongodb" service to be fully ready before starting the "testapp" service. If you need to ensure that the "mongodb" service is fully ready before starting the "testapp" service, you may need to implement a custom health check or use a tool like "wait-for-it" or "dockerize" in your application.
+
+# Docker compose cmds:
+
+# To create & start the services defined in the docker-compose file:
+# docker compose -f filename.yaml up -d
+
+# To stop, delete & remove the services:
+# docker compose -f filename.yaml down  
+
+
+#### Docker Compose creates and manages ALL containers defined in the file. So, if you have 3 services defined in the file, it will create and manage all 3 containers. 
+
+#Note: If you want to start only a specific service, you can use the following command:
+# docker compose -f filename.yaml up -d service_name
+
+
+##### NOTE: As, now, I have changed the name of "yaml" file to "compose.yaml", so, I can directly run it through:
+# docker compose up -d
+
+# I don't need to specify the file name because "docker compose" will look for a file named "compose.yaml"  firstly by default.

@@ -15,6 +15,8 @@ We are going to set it using `Docker`. For that we gonna need two images :
 
 ---
 
+##### Creating containers with `terminal cmds`:
+
 -> For `mongo` container:
 
 Go to : Docker_testapp\References\images\1770547027322.png
@@ -24,5 +26,11 @@ Go to : Docker_testapp\References\images\1770547027322.png
 Go to : Docker_testapp\References\images\1770548213468.png
 
 Note : In the `MONGODB_URL` environment variable, that `mongo` after `@` is the name of our `mongo image's container`.
+
+---
+
+#### Docker Compose :
+
+    `Creating containers with ".yaml" file`.`
 
 ---
